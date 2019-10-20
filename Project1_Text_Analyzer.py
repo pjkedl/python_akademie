@@ -55,25 +55,25 @@ print('Welcome ', user)
 print('-' * 40)
 print('We have 3 texts to be analyzed.')
 choice = int(input('Enter a number btw. 1 and 3 to select: '))
-ind = choice - 1
+index = choice - 1
 
-txt_an = TEXTS[ind].split()
+txt_an = TEXTS[index].split()
 txt_len = len(txt_an)
-#print(txt_an)
+
 print('There are', txt_len, 'words in the selected text')
 
-titlcase = 0
-uppcase = 0
-lowcase = 0
+titlecase = 0
+uppercase = 0
+lowercase = 0
 numeric = 0
 i = 0
 while i < txt_len:
     if txt_an[i][0].isupper():
-        titlcase += 1
+        titlecase += 1
     elif txt_an[i].isupper():
-        uppcase += 1
+        uppercase += 1
     elif txt_an[i].islower():
-        lowcase += 1
+        lowercase += 1
     elif txt_an[i].isnumeric():
         numeric += 1
     i += 1
@@ -96,16 +96,14 @@ while k < txt_len:
     delky[lenk].append(txt_an[k])
     if txt_an[k].isnumeric():
         suma = suma + int(txt_an[k])
-    #print(lenk)
     k += 1
 
 print('-' * 40)
-print('There are', titlcase, 'titlecase words')
-print('There are', uppcase, 'uppercase words')
-print('There are', lowcase, 'lowercase words')
+print('There are', titlecase, 'titlecase words')
+print('There are', uppercase, 'uppercase words')
+print('There are', lowercase, 'lowercase words')
 print('There are', numeric, 'numeric strings')
 print('-' * 40)
-#print(delky)
 
 keylist = list(delky.keys())
 k = 0
