@@ -28,25 +28,34 @@ in modern oceans. Other fish such as paddlefish,
 garpike and stingray are also present.'''
 ]
 
-passwords = {'bob': 123, 'ann': 'pass123', 'mike': 'password123', 'liz': 'pass123'}
+passwords = {
+    'bob': '123',
+    'ann': 'pass123',
+    'mike': 'password123',
+    'liz': 'pass123'
+}
 
 print('-' * 40)
 print('Welcome to Karol text analyzer. Please log in: ')
-usr = input('Username: ')
-if usr not in list(passwords.keys()):
+user = input('Username: ')
+if user not in passwords:
     print('wrong username')
     exit()
 
-i = 0
-pwd = str(input('Password: '))
-while i < 3 and pwd != str(passwords[usr]):
+attempt = 0
+password = str(input('Password: '))
+while attempt < 2 and password != str(passwords[user]):
     print('wrong password')
-    pwd = input('Password: ')
-print('Welcome ', usr)
+    password = input('Password: ')
+    if attempt == 1 and password != str(passwords[user]):
+        print('Wrong password. All attempts used. Exiting program.')
+        exit()
+    attempt += 1
+print('Welcome ', user)
 print('-' * 40)
 print('We have 3 texts to be analyzed.')
-sel = int(input('Enter a number btw. 1 and 3 to select: '))
-ind = sel-1
+choice = int(input('Enter a number btw. 1 and 3 to select: '))
+ind = choice - 1
 
 txt_an = TEXTS[ind].split()
 txt_len = len(txt_an)
