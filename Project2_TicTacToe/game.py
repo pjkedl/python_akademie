@@ -51,7 +51,10 @@ def check_move(index):
         return False
     else:
         return True
-
+def check_board(board):
+    if not '' in board:
+        print('No more moves possible. Game has no winner. GAME OVER')
+        exit()
 def check_winner(board):
     if ((board[0] == 'X' and board[1] == 'X' and board[2] == 'X') or
             (board[3] == 'X' and board[4] == 'X' and board[5] == 'X') or
@@ -79,6 +82,7 @@ def main():
     game_rules()
     turn = 0
     while True:
+        check_board(dataset)
         index, char = ask_for_move(turn)
         if check_move(index) == False:
             print('This field is occupied. Please select another one.')
@@ -88,7 +92,7 @@ def main():
             show_board(dataset)
             turn += 1
         if check_winner(dataset) == True:
-            print('Winner is player', char)
+            print('CONGRATULATIONS. Winner is player', char)
             break
 
 main()
