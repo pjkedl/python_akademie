@@ -19,21 +19,6 @@ def show_board(my_list):
     print(f'\n'.join([' |'.join(i) for i in zip(*[iter(my_list)] * N)]))
     print('=' * 10)
 
-# def ask_for_move(turn):
-#     print('=' * 40)
-#     char = ''
-#     if turn % 2 == 0:
-#         char = 'O'
-#         index = input(f'Player {char} | Please enter your move number: ')
-#         if index.isdigit() and index in range(9):
-#             print(index, char)
-#     else:
-#         char = 'X'
-#         index = input(f'Player {char} | Please enter your move number: ')
-#         if index.isdigit() and index in range(9):
-#             print(index, char)
-
-turn = 0
 def ask_for_move(turn):
     if turn % 2 == 0:
         char = 'O'
@@ -61,7 +46,11 @@ def move(index, char):
     index = int(index)
     dataset[index-1] = char
 
-
+def check_move(index):
+    if dataset[index-1] != '':
+        return False
+    else:
+        return True
 
 def check_winner(board):
     if ((board[0] == 'X' and board[1] == 'X' and board[2] == 'X') or
@@ -86,25 +75,20 @@ def check_winner(board):
         return False
 
 
+def main():
+    game_rules()
+    turn = 0
+    while True:
+        index, char = ask_for_move(turn)
+        if check_move(index) == False:
+            print('This field is occupied. Please select another one.')
+            continue
+        else:
+            move(index, char)
+            show_board(dataset)
+            turn += 1
+        if check_winner(dataset) == True:
+            print('Winner is player', char)
+            break
 
-
-#
-# movement = ask_for_move(1)
-# move(movement[0], movement[1])
-# show_board(dataset)
-
-# turn = 1
-# def main():
-#     game_rules()
-#     show_board(dataset)
-#     turn = 1
-#     while True:
-# ask_for_move(turn)
-# move(ask_for_move(turn))
-# show_board(dataset)
-#main()
-
-# move(ask_for_move(1))
-# show_board(dataset)
-# def ask_for_move
-# input('Select field plae')
+main()
