@@ -1,14 +1,17 @@
 import random
 
+
 def game_header():
     print('Hi there!')
     print("I've generated a random 4 digit number for you.")
-    number = str(2017)
-    generated_number = [int(x) for x in str(number)]
-    # number = str(random.randint(1000,9999))
     print("Let's play a bulls and cows game.")
-    print(generated_number)
+
+
+def number_generator():
+    number = str(random.randint(1000,9999))
+    generated_number = [int(x) for x in str(number)]
     return generated_number
+
 
 def ask_for_number():
     while True:
@@ -25,9 +28,8 @@ def ask_for_number():
             break
     return guess
 
-def bull_cow(counter):
-    computer_list = game_header()
-    my_list = ask_for_number()
+
+def bull_cow(counter, computer_list, my_list):
     bull = 0
     cow = 0
     for index, item in enumerate(my_list):
@@ -38,25 +40,28 @@ def bull_cow(counter):
                 cow += 1
     if bull != 4:
         print(f'{bull} bulls, {cow} cows')
-    else:
-        print(f"Correct, you've guessed the right number in {counter} guesses!")
+    elif bull == 4 and counter <= 7:
+        print(f"Correct, you've guessed the right number in {counter} guesses! That's excellent performance.")
         exit()
+    elif bull == 4 and counter in range(8, 15):
+        print(f"Correct, you've guessed the right number in {counter} guesses! That's very good performance.")
+        exit()
+    elif bull == 4 and counter in range(16, 25):
+        print(f"Correct, you've guessed the right number in {counter} guesses! That's not very good performance.")
+        exit()
+    elif bull == 4 and counter > 25:
+        print(f"Correct, you've guessed the right number in {counter} guesses! You can do better.")
+        exit()
+
 
 def main():
     counter = 1
     game_header()
+    computer_list = number_generator()
     while True:
-        ask_for_number()
-        bull_cow(counter)
+        bull_cow(counter, ask_for_number(), computer_list)
         counter += 1
+        print(counter)
+
 
 main()
-
-
-
-
-
-
-
-
-
