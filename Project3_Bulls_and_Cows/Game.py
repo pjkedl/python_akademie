@@ -1,5 +1,5 @@
 import random
-
+import itertools
 
 def game_header():
     print('Hi there!')
@@ -65,13 +65,11 @@ def bull_cow(counter, guess, secret):
 
 
 def main():
-    counter = 1
     game_header()
     secret = number_generator()
-    while True:
+    for counter in itertools.count(1):
         if bull_cow(counter, ask_for_number(), secret) == True:
             break
-        counter += 1
     exit()
 
 main()
