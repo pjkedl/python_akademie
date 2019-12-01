@@ -37,39 +37,41 @@ def ask_for_number():
     return guess
 
 
-def bull_cow(counter, computer_list, my_list):
+def evaluate_performance(counter):
+    if counter <= 7:
+        return "That's excellent performance"
+    elif counter <= 15:
+        return "That's very good performance"
+    elif counter <= 25:
+        return "That's not very good performance"
+    else:
+        return "You can do better"
+
+
+def bull_cow(counter, guess, secret):
     bull = 0
     cow = 0
-    for index, item in enumerate(my_list):
-        if item in computer_list:
-            if computer_list[index] == my_list[index]:
+    for index, item in enumerate(guess):
+        if item in secret:
+            if secret[index] == guess[index]:
                 bull += 1
             else:
                 cow += 1
     if bull != 4:
         print(f'{bull} bulls, {cow} cows')
-    elif bull == 4 and counter <= 7:
-        print(f"Correct, you've guessed the right number in {counter} guesses! That's excellent performance.")
-        exit()
-    elif bull == 4 and counter in range(8, 15):
-        print(f"Correct, you've guessed the right number in {counter} guesses! That's very good performance.")
-        exit()
-    elif bull == 4 and counter in range(16, 25):
-        print(f"Correct, you've guessed the right number in {counter} guesses! That's not very good performance.")
-        exit()
-    elif bull == 4 and counter > 25:
-        print(f"Correct, you've guessed the right number in {counter} guesses! You can do better.")
-        exit()
+    else:
+        print(f"Correct, you've guessed the right number in {counter} guesses! {evaluate_performance(counter)}")
+        return True
 
 
 def main():
     counter = 1
     game_header()
-    computer_list = number_generator()
+    secret = number_generator()
     while True:
-        bull_cow(counter, ask_for_number(), computer_list)
+        if bull_cow(counter, ask_for_number(), secret) == True:
+            break
         counter += 1
-        print(counter)
-
+    exit()
 
 main()
